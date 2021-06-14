@@ -21,14 +21,15 @@ type search struct {
 func main() {
 	param := flag.String("s", "", "word for search")
 	flag.Parse()
-	if *param != "" {
-		docs := scan().Search(param)
-		fmt.Printf("Search results:\n\n")
-		for _, d := range docs {
-			fmt.Println(d)
-		}
-	} else {
+	if *param == "" {
 		flag.PrintDefaults()
+		return
+	}
+
+	docs := scan().Search(param)
+	fmt.Printf("Search results:\n\n")
+	for _, d := range docs {
+		fmt.Println(d)
 	}
 }
 
