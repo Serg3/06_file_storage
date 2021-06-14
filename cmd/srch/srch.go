@@ -26,19 +26,7 @@ func main() {
 		return
 	}
 
-	docs := scan().Search(param)
-	fmt.Printf("Search results:\n\n")
-	for _, d := range docs {
-		fmt.Println(d)
-	}
-}
-
-// Function scan() uses package 'crawler'
-// to search through Go sites by word
-// and returs sorted *index.Storage result
-func scan() *index.Storage {
 	s := new()
-
 	if s.storage.Empty() {
 		for _, url := range s.sites {
 			res, err := s.scanner.Scan(url, s.depth)
@@ -50,11 +38,14 @@ func scan() *index.Storage {
 		}
 		s.storage.Save()
 	}
-
 	s.storage.Index()
 	s.storage.Sort()
 
-	return s.storage
+	docs := s.storage.Search(param)
+	fmt.Printf("Search results:\n\n")
+	for _, d := range docs {
+		fmt.Println(d)
+	}
 }
 
 func new() *search {
