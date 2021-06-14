@@ -25,8 +25,6 @@ func New() *Storage {
 	data, err := storage.Load()
 
 	if err != nil {
-		fmt.Printf("Storage file was not found! Scanning started...\n\n")
-
 		return &Storage{
 			counter: 0,
 			docs:    make(crwDocs, 0),

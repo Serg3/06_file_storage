@@ -28,6 +28,7 @@ func main() {
 
 	s := new()
 	if s.storage.Empty() {
+		fmt.Printf("Storage is empty. Performing a new scan...\n\n")
 		for _, url := range s.sites {
 			res, err := s.scanner.Scan(url, s.depth)
 			if err != nil {
